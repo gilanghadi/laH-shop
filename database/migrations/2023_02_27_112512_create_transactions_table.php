@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('order_id')->unsigned();
             $table->string('no_rekening');
             $table->bigInteger('price');
-            $table->boolean('status');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

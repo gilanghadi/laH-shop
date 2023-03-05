@@ -5,7 +5,7 @@
         <div class="row flex-wrap">
             @foreach ($product as $p)
                 <div class="card col-sm-3 border-0 m-1 p-0 rounded-3">
-                    <div class="p-0">
+                    <div>
                         <img src="{{ url('storage') }}/{{ $p->image }}" class="card-img-top w-100 rounded-3"
                             alt="{{ $p->image }}" style="min-height: 180px;">
                     </div>

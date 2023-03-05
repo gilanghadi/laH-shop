@@ -12,6 +12,8 @@
                         <th scope="col">Image</th>
                         <th scope="col">Nama</th>
                         <th scope="col">NameProduct</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Telp</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Price</th>
                         <th scope="col">Metode</th>
@@ -27,6 +29,8 @@
                             </td>
                             <td>{{ \Illuminate\Support\Str::limit($t->user->name, '15', '..') }}</td>
                             <td>{{ $t->order->product->name }}</td>
+                            <td>{{ $t->order->address }}</td>
+                            <td>{{ $t->order->telp }}</td>
                             <td>{{ $t->order->amount }}</td>
                             <td>{{ number_format($t->price) }}</td>
                             <td>{{ $t->order->metode }}</td>
