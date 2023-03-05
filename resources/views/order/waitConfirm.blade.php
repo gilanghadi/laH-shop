@@ -31,7 +31,7 @@
                             <td>{{ \App\Models\Product::find($o->product_id)->name }}</td>
                             <td>{{ number_format(\App\Models\Product::find($o->product_id)->price) }}</td>
                             <td>{{ number_format($o->price) }}</td>
-                            <td>{{ $o->amount }}</td>
+                            <td>{{ $o->amount }} stock</td>
                             <td>{{ $o->metode }}</td>
                             <td>{{ date('d-m-Y', strtotime($o->created_at)) }}</td>
 
