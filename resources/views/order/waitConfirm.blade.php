@@ -52,9 +52,9 @@
                                     @if ($o->metode == 'cod')
                                         <a href="#" class="btn disabled border-0" id="button-prim">Cancel</a>
                                     @else
-                                        @if ($transaction == 1)
-                                            <a href="" class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#staticBackdrop">paid</a>
+                                        @if ($transaction->status == 1)
+                                            <a href="" class="btn disabled border-0" id="button-prim"
+                                                data-bs-toggle="modal" data-bs-target="#staticBackdrop">paid</a>
                                         @else
                                             <a href="" class="btn btn-warning" data-bs-toggle="modal"
                                                 data-bs-target="#staticBackdrop">Pay</a>

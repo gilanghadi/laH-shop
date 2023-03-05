@@ -16,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $transaction = Transaction::where('status', '=', 0)->first();
+        $transaction = Transaction::where('status', 1)->first();
         $order = Order::where('user_id', '=', Auth::user()->id)->get();
         return view('order.waitConfirm', compact(['order', 'transaction']));
     }
