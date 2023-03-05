@@ -46,7 +46,16 @@
                                 <i class="bi bi-box-seam-fill"></i>
                                 <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill"
                                     id="button-sec">
-                                    {{ App\Models\Order::all()->count() }}+
+                                    {{ App\Models\Order::all()->count() }}
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('transaction.show') }}" class="nav-link position-relative me-2 text-light">
+                                <i class="bi bi-check-circle"></i>
+                                <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill"
+                                    id="button-sec">
+                                    {{ App\Models\Transaction::all()->count() }}
                                 </span>
                             </a>
                         </li>
@@ -59,7 +68,7 @@
                                 @endphp
                                 <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill"
                                     id="button-sec">
-                                    {{ $whislist }}+
+                                    {{ $whislist }}
                                 </span>
                             </a>
                         </li>
@@ -71,7 +80,7 @@
                                 @endphp
                                 <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill"
                                     id="button-sec">
-                                    {{ $orderCount }}+
+                                    {{ $orderCount }}
                                 </span>
                             </a>
                         </li>

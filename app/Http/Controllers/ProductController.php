@@ -37,7 +37,7 @@ class ProductController extends Controller
             "name" => "required|max:255",
             "stock" => "required",
             "price" => "required",
-            "desc" => "required|max:255",
+            "desc" => "required",
             "image" => "required|mimes:jpeg,png,jpg|image",
         ]);
         if ($validator->fails()) {

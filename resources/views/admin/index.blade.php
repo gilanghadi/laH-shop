@@ -25,10 +25,10 @@
                             <td><img src="{{ url('storage') }}/{{ $p->image }}" alt="{{ $p->image }}"
                                     width="90">
                             </td>
-                            <td>{{ $p->name }}</td>
+                            <td>{{ \Illuminate\Support\Str::limit($p->name, '15', '..') }}</td>
                             <td>{{ $p->stock }}</td>
                             <td>{{ number_format($p->price) }}</td>
-                            <td>{{ $p->desc }}</td>
+                            <td>{{ \Illuminate\Support\Str::limit($p->desc, '15', '..') }}</td>
                             <td>
                                 <a href="{{ route('product.edit', $p->id) }}" class="btn" id="button-prim"><i
                                         class="bi bi-pen"></i></a>

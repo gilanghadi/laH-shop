@@ -14,6 +14,7 @@
                         <th scope="col">Price / Product</th>
                         <th scope="col">Price</th>
                         <th scope="col">Amount</th>
+                        <th scope="col">Metode</th>
                         <th scope="col">Order At</th>
                         <th scope="col">Confirm At</th>
                         <th scope="col">Status</th>
@@ -31,6 +32,7 @@
                             <td>{{ number_format(\App\Models\Product::find($o->product_id)->price) }}</td>
                             <td>{{ number_format($o->price) }}</td>
                             <td>{{ $o->amount }}</td>
+                            <td>{{ $o->metode }}</td>
                             <td>{{ date('d-m-Y', strtotime($o->created_at)) }}</td>
 
                             @if (strtotime($o->updated_at) === strtotime($o->created_at))
@@ -47,7 +49,16 @@
                             </td>
                             <td>
                                 @if ($o->is_confirmed == 1)
-                                    <a href="" class="btn disabled" id="button-prim">Cancel</a>
+                                    @if ($o->metode == 'cod')
+                                        <a href="#" class="btn disabled border-0" id="button-prim">Cancel</a>
+                                    @else
+                                        @if ($transaction)
+                                            <a href="" class="btn disabled border-0" id="button-prim">Paid</a>
+                                        @else
+                                            <a href="" class="btn btn-warning" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop">Pay</a>
+                                        @endif
+                                    @endif
                                 @else
                                     <a href="{{ route('order.destroy', $o->id) }}" class="btn btn-danger">Cancel</a>
                                 @endif
@@ -59,4 +70,41 @@
             <a href="{{ route('home') }}" class="btn" id="button-prim"><i class="bi bi-arrow-left"></i></a>
         </div>
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="bg-white rounded-3 modal-dialog">
+            <form action="{{ route('transaction.store', $o->id) }}" method="post">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 text-uppercase" id="staticBackdropLabel">Pembayaran Melalui
+                            {{ $o->metode }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput3" class="form-label me-2">No_Rekening
+                                {{ $o->metode }}</label>
+                            <input type="number" class="form-control bg-transparent" name="no_rekening"
+                                id="exampleFormControlInput3" placeholder="Your Rekening Number" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput3" class="form-label me-2"> Total:
+                                <span id="button-sec" class="p-1 rounded-md rounded-3 px-2">{{ number_format($o->price) }}
+                                    IDR</span></label>
+                            <input type="number" class="form-control bg-transparent" name="price"
+                                id="exampleFormControlInput3" placeholder="Amount To Be Paid" required>
+                        </div>
+                    </div>
+                    <div class="mt-1 p-3 text-end">
+                        <button type="button" class="btn" id="button-prim" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn" id="button-sec">Pay</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+
 @endsection
