@@ -18,7 +18,8 @@
                             {{ \Illuminate\Support\Str::limit($w->product->name, 12, '...') }}</h5>
                         <div class="d-flex">
                             <span class="card-text me-2 text-danger">{{ number_format($w->product->price) }} IDR</span>
-                            <span class="px-3 py-0 rounded-3 rounded-md" id="button-prim">{{ $w->product->stock }}
+                            <span class="px-3 py-0 rounded-3 rounded-md"
+                                id="button-prim">{{ number_format($w->product->stock) }}
                                 Stock</span>
 
                         </div>

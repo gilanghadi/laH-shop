@@ -14,7 +14,8 @@
                         <h5 class="card-title fw-semibold">{{ \Illuminate\Support\Str::limit($p->name, 12, '...') }}</h5>
                         <div class="d-flex">
                             <span class="card-text me-2 text-danger">{{ number_format($p->price) }} IDR</span>
-                            <span class="px-3 py-0 rounded-3 rounded-md" id="button-prim">{{ $p->stock }} Stock</span>
+                            <span class="px-3 py-0 rounded-3 rounded-md" id="button-prim">{{ number_format($p->stock) }}
+                                Stock</span>
 
                         </div>
                         <p class="card-text mt-1">{{ \Illuminate\Support\Str::limit($p->desc, 25, '...') }}</p>

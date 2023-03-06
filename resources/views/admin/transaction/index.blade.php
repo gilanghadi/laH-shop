@@ -31,7 +31,7 @@
                             <td>{{ $t->order->product->name }}</td>
                             <td>{{ $t->order->address }}</td>
                             <td>{{ $t->order->telp }}</td>
-                            <td>{{ $t->order->amount }} Stock</td>
+                            <td>{{ number_format($t->order->amount) }} Stock</td>
                             <td>{{ number_format($t->price) }}</td>
                             <td>{{ $t->order->metode }}</td>
                             <td>

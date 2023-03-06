@@ -22,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($order as $o)
+                    @forelse ($order as $o)
                         <tr class="text-capitalize">
                             <td>{{ $loop->iteration }}</td>
                             <td><img src="{{ url('storage') }}/{{ \App\Models\Product::find($o->product_id)->image }}"
@@ -31,7 +31,7 @@
                             <td>{{ \App\Models\Product::find($o->product_id)->name }}</td>
                             <td>{{ number_format(\App\Models\Product::find($o->product_id)->price) }}</td>
                             <td>{{ number_format($o->price) }}</td>
-                            <td>{{ $o->amount }} stock</td>
+                            <td>{{ number_format($o->amount) }} stock</td>
                             <td>{{ $o->metode }}</td>
                             <td>{{ date('d-m-Y', strtotime($o->created_at)) }}</td>
 
@@ -52,9 +52,13 @@
                                     @if ($o->metode == 'cod')
                                         <a href="#" class="btn disabled border-0" id="button-prim">Cancel</a>
                                     @else
-                                        @if ($transaction->status == 1)
-                                            <a href="" class="btn disabled border-0" id="button-prim"
-                                                data-bs-toggle="modal" data-bs-target="#staticBackdrop">paid</a>
+                                        @if (count($transaction) > 0)
+                                            @if (App\Models\Transaction::where('user_id', '=', Auth::user()->id)->where('order_id', '=', $o->id)->count() > 0)
+                                                <a href="" class="btn disabled border-0" id="button-prim">paid</a>
+                                            @else
+                                                <a href="" class="btn btn-warning" data-bs-toggle="modal"
+                                                    data-bs-target="#staticBackdrop">Pay</a>
+                                            @endif
                                         @else
                                             <a href="" class="btn btn-warning" data-bs-toggle="modal"
                                                 data-bs-target="#staticBackdrop">Pay</a>
@@ -65,7 +69,11 @@
                                 @endif
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <div class="card p-4 m-3">
+                            Tidak Ada Product Yang Anda Checkout...
+                        </div>
+                    @endforelse
                 </tbody>
             </table>
             <a href="{{ route('home') }}" class="btn" id="button-prim"><i class="bi bi-arrow-left"></i></a>

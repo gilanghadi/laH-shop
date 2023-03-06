@@ -16,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $transaction = Transaction::where('status', 1)->first();
+        $transaction = Transaction::where('user_id', '=', Auth::user()->id)->get();
         $order = Order::where('user_id', '=', Auth::user()->id)->get();
         return view('order.waitConfirm', compact(['order', 'transaction']));
     }
@@ -47,20 +47,47 @@ class OrderController extends Controller
         }
 
         $product = Product::find($id);
-        $newOrder = Order::where('user_id', '=', Auth::user()->id)->where('product_id', '=', $product->id)->first();
+        $cekOrder = Order::where('user_id', '=', Auth::user()->id)->where('is_confirmed', '=', 0)->first();
 
 
         if ($product->stock <= $request->amount) {
             return redirect()->route('order.show', $product->id)->with('error', 'Jumlah Barang Yang Diminta Tidak Mencukupi');
         }
-        if (empty($newOrder)) {
-            $price = $product->price * $request->amount;
+
+        $price = $product->price * $request->amount;
+
+        if (empty($cekOrder)) {
             $orders = new Order();
 
             $postData = ['user_id' => Auth::user()->id, 'product_id' => $product->id, 'price' => $price, 'is_confirmed' => false, 'amount' => $request->amount, 'address' => $request->address, 'postcode' => $request->postcode, 'telp' => $request->telp, 'metode' => $request->metode];
             $orders->create($postData);
 
             if (!$orders) {
+                return back()->with('error', 'Terjadi Kesalahan Saat Mengorder');
+            } else {
+                return redirect()->route('order.waitConfirm')->with('success', 'Order Berhasil');
+            }
+        }
+
+        $newOrder = Order::where('product_id', '=', $product->id)->where('user_id', '=', Auth::user()->id)->first();
+        if (empty($newOrder)) {
+            $orders = new Order();
+
+            $postData = ['user_id' => Auth::user()->id, 'product_id' => $product->id, 'price' => $price, 'is_confirmed' => false, 'amount' => $request->amount, 'address' => $request->address, 'postcode' => $request->postcode, 'telp' => $request->telp, 'metode' => $request->metode];
+            $orders->create($postData);
+
+            if (!$orders) {
+                return back()->with('error', 'Terjadi Kesalahan Saat Mengorder');
+            } else {
+                return redirect()->route('order.waitConfirm')->with('success', 'Order Berhasil');
+            }
+        } else {
+            $newPrice = $product->price * $request->amount;
+            $newOrder->amount = $newOrder->amount + $request->amount;
+            $newOrder->price = $newOrder->price + $newPrice;
+            $newOrder->update();
+
+            if (!$newOrder) {
                 return back()->with('error', 'Terjadi Kesalahan Saat Mengorder');
             } else {
                 return redirect()->route('order.waitConfirm')->with('success', 'Order Berhasil');
