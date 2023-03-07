@@ -54,9 +54,9 @@
                                     @else
                                         @if (count($transaction) > 0)
                                             @if (App\Models\Transaction::where('user_id', '=', Auth::user()->id)->where('order_id', '=', $o->id)->count() > 0)
-                                                <a href="" class="btn disabled border-0" id="button-prim">paid</a>
+                                                <a href="#" class="btn disabled border-0" id="button-prim">paid</a>
                                             @else
-                                                <a href="" class="btn btn-warning" data-bs-toggle="modal"
+                                                <a href="#" class="btn btn-warning" data-bs-toggle="modal"
                                                     data-bs-target="#staticBackdrop">Pay</a>
                                             @endif
                                         @else

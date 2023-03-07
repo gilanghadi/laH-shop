@@ -28,10 +28,10 @@ class AdminController extends Controller
         $order->is_confirmed = true;
         $order->save();
 
-        $product = Product::find($id);
+        $product = Product::find($order->id);
         $newStock = $product->stock - $order->amount;
         $product->stock = $newStock;
-        $product->update();
+        $product->save();
         return redirect()->route('orderAdmin.show')->with('success', 'Pesanan Dikonfirmasi');
     }
     public function cancel($id)

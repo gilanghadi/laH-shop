@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Order Confirm')
+
 @section('content')
     <div class="container">
         <div class="bg-white border-0 rounded-md rounded-3 p-5">
