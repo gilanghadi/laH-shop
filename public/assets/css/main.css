@@ -2,27 +2,71 @@
   font-family: 'Poppins', sans-serif;
 }
 
+input {
+  outline: none;
+  box-shadow: none !important;
+  transition: .3s;
+}
+
+input:focus {
+  border: var(--primary) 1px solid;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #F8FAFC inset !important;
+  -webkit-text-fill-color: var(--primary) !important;
+}
+
+
 :root {
   --primary: rgba(6, 43, 48, 1);
   --secondary: rgba(66, 215, 133, 1);
+  --warning: rgb(230, 218, 54);
+  --danger: rgb(215, 71, 66);
+  --text-prim: rgba(6, 43, 48, 1);
+  --text-sec: rgba(66, 215, 133, 1);
   --btn-prim: rgba(6, 43, 48, 0.2);
-  --btn-sec: rgba(66, 215, 133, 0.3);
+  --btn-sec: rgba(66, 215, 133, 0.342);
+  --btn-warn: rgba(230, 218, 54, 0.342);
+  --btn-danger: rgba(215, 71, 66, 0.342);
 }
 
-#bg-primarys {
+.bg-primarys {
   background-color: var(--primary) !important;
 }
 
-#bg-secondary {
+.bg-secondarys {
   background-color: var(--secondary) !important;
 }
 
-#button-prim {
-  background-color: var(--btn-prim);
-  color: var(--primary);
+.text-primarys {
+  color: var(--primary) !important;
 }
 
-#button-sec {
-  background-color: var(--btn-sec);
-  color: var(--secondary);
+.text-secondarys {
+  color: var(--secondary) !important;
+}
+
+
+.btn-primarys {
+  background-color: var(--btn-prim) !important;
+  color: var(--primary) !important;
+}
+
+.btn-secondarys {
+  background-color: var(--btn-sec) !important;
+  color: var(--secondary) !important;
+}
+
+.btn-warnings {
+  background-color: var(--btn-warn) !important;
+  color: var(--warning) !important;
+}
+
+.btn-dangers {
+  background-color: var(--btn-danger) !important;
+  color: var(--danger) !important;
 }

@@ -24,7 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
-        return view('home', compact(['product']));
+        $products = Product::paginate(40)->withQueryString();
+        return view('home', [
+            'products' => $products
+        ]);
     }
 }

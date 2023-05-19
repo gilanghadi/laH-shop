@@ -46,7 +46,7 @@ class OrderController extends Controller
             return back()->with($validator->messages()->all()[0])->withInput();
         }
 
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         $cekOrder = Order::where('user_id', '=', Auth::user()->id)->where('is_confirmed', '=', 0)->first();
 
 

@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->unsigned();
-            $table->foreignId('product_id')->unsigned();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('user_id');
+            $table->foreignUuid('product_id');
             $table->string('address');
             $table->integer('postcode');
             $table->bigInteger('telp');

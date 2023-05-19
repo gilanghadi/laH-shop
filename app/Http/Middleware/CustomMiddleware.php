@@ -16,10 +16,9 @@ class CustomMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role == 'customer') {
-            return $next($request);
-        } else {
+        if (!Auth::check() && Auth::user()->role == 'customer') {
             return view('error.404');
         }
+        return $next($request);
     }
 }

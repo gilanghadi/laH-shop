@@ -28,7 +28,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('cancel/{id}', 'App\Http\Controllers\custom\AdminController' . '@cancel')->name('orderAdmin.cancel');
 
     // transaction success
-    Route::get('/transaction', 'App\Http\Controllers\custom\AdminController' . '@transactionshow')->name('transaction.show');
+    Route::get('transaction', 'App\Http\Controllers\custom\AdminController' . '@transactionshow')->name('transaction.show');
 
     // update
     Route::post('product/update/{id}', 'App\Http\Controllers\ProductController' . '@update')->name('product.update');
@@ -48,7 +48,7 @@ Route::prefix('home')->middleware(['auth', 'custom'])->group(function () {
     Route::get('whistlist/destroy/{id}', 'App\Http\Controllers\WhistlistController' . '@destroy')->name('whistlist.destroy');
 
     // order User
-    Route::get('orderDetail', 'App\Http\Controllers\OrderController' . '@index')->name('order.waitConfirm');
+    Route::get('your-order', 'App\Http\Controllers\OrderController' . '@index')->name('order.waitConfirm');
     Route::post('order/store/{id}', 'App\Http\Controllers\OrderController' . '@store')->name('order.store');
     Route::get('product/show/{id}', 'App\Http\Controllers\OrderController' . '@show')->name('order.show');
     Route::get('order/destroy/{id}', 'App\Http\Controllers\OrderController' . '@destroy')->name('order.destroy');

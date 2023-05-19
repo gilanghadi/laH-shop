@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('whistlists', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->unsigned();
-            $table->foreignId('product_id')->unsigned();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('user_id');
+            $table->foreignUuid('product_id');
             $table->timestamps();
         });
     }

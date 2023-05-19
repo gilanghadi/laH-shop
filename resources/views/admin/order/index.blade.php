@@ -4,9 +4,9 @@
 
 @section('content')
     <div class="container">
-        <div class="bg-white border-0 rounded-md rounded-3 p-5">
+        <div class="px-5 mt-4">
             <p class="fw-semibold fs-4">Products Confirm</p>
-            <hr class="mb-2">
+            <hr class="mb-4">
             <table class="table" id="table_id">
                 <thead>
                     <tr>
@@ -33,19 +33,18 @@
                             <td>{{ date('d-m-Y', strtotime($o->created_at)) }}</td>
                             <td>
                                 @if ($o->is_confirmed == 1)
-                                    <span class="badge" id="button-sec">Confirmed</span>
+                                    <span class="badge btn-secondarys">Confirmed</span>
                                 @else
-                                    <span class="badge bg-warning">Pendding</span>
+                                    <span class="badge btn-warnings">Pendding</span>
                                 @endif
                             </td>
                             <td>
                                 @if ($o->is_confirmed == 0)
-                                    <a href="{{ route('orderAdmin.confirm', $o->id) }}" class="btn"
-                                        id="button-sec">Confirm
+                                    <a href="{{ route('orderAdmin.confirm', $o->id) }}" class="btn btn-secondarys">Confirm
                                     </a>
                                 @else
                                     <a href="{{ route('orderAdmin.cancel', $o->id) }}"
-                                        class="btn btn-danger">Unconfirmed</a>
+                                        class="btn btn-dangers">Unconfirmed</a>
                                 @endif
                             </td>
                         </tr>

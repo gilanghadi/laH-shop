@@ -1,15 +1,15 @@
-<nav class="navbar navbar-expand-md shadow-sm bg-light" id="bg-primarys">
+<nav class="navbar navbar-expand-md border-bottom">
     <div class="container">
         @if (Auth::check() && Auth::user()->role === 'admin')
-            <a class="navbar-brand text-light" href="{{ route('admin.home') }}">
+            <a class="navbar-brand text-secondarys fs-4" href="{{ route('admin.home') }}">
                 laH?shop
             </a>
-        @elseif (Auth::check() && Auth::user()->role === 'custom')
-            <a class="navbar-brand text-light" href="{{ route('home') }}">
+        @elseif (Auth::check() && Auth::user()->role === 'customer')
+            <a class="navbar-brand text-secondarys fs-4" href="{{ route('home') }}">
                 laH?shop
             </a>
         @else
-            <a class="navbar-brand text-light" href="{{ route('welcome') }}">
+            <a class="navbar-brand text-secondarys fs-4" href="{{ route('welcome') }}">
                 laH?shop
             </a>
         @endif
@@ -30,68 +30,99 @@
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link text-primarys me-1 pe-2 border-end"
+                                href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                     @endif
 
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link ms-2 btn-secondarys rounded-3" href="{{ route('register') }}">Register</a>
                         </li>
                     @endif
                 @else
                     @if (Auth::user()->role === 'admin')
                         <li class="nav-item">
-                            <a href="{{ route('orderAdmin.show') }}" class="nav-link position-relative me-2 text-light">
+                            <a href="{{ route('orderAdmin.show') }}" class="nav-link position-relative me-2 text-primarys">
                                 <i class="bi bi-box-seam-fill"></i>
-                                <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill"
-                                    id="button-sec">
-                                    {{ App\Models\Order::all()->count() }}
-                                </span>
+                                @if (App\Models\Order::all()->count() === 0)
+                                    <span
+                                        class="position-absolute d-none top-4 start-90 translate-middle badge rounded-pill btn-secondarys">
+                                        {{ App\Models\Order::all()->count() }}
+                                    @else
+                                    </span>
+                                    <span
+                                        class="position-absolute top-4 start-90 translate-middle badge rounded-pill btn-secondarys">
+                                        {{ App\Models\Order::all()->count() }}
+                                    </span>
+                                @endif
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('transaction.show') }}" class="nav-link position-relative me-2 text-light">
+                            <a href="{{ route('transaction.show') }}"
+                                class="nav-link position-relative me-2 text-primarys">
                                 <i class="bi bi-check-circle"></i>
-                                <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill"
-                                    id="button-sec">
-                                    {{ App\Models\Transaction::all()->count() }}
-                                </span>
+                                @if (App\Models\Transaction::all()->count() === 0)
+                                    <span
+                                        class="position-absolute d-none top-4 start-90 translate-middle badge rounded-pill ">
+                                        {{ App\Models\Transaction::all()->count() }}
+                                    </span>
+                                @else
+                                    <span
+                                        class="position-absolute top-4 start-90 translate-middle badge rounded-pill btn-secondarys">
+                                        {{ App\Models\Transaction::all()->count() }}
+                                    </span>
+                                @endif
                             </a>
                         </li>
                     @else
                         <li class="nav-item">
-                            <a href="{{ route('whistlist.show') }}" class="nav-link position-relative me-2 text-light">
+                            <a href="{{ route('whistlist.show') }}" class="nav-link position-relative me-2 text-primarys">
                                 <i class="bi bi-bag"></i>
                                 @php
                                     $whislist = App\Models\Whistlist::where('user_id', '=', Auth::user()->id)->count();
                                 @endphp
-                                <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill"
-                                    id="button-sec">
-                                    {{ $whislist }}
-                                </span>
+                                @if ($whislist === 0)
+                                    <span
+                                        class="position-absolute d-none btn-secondarys top-4 start-90 translate-middle badge rounded-pill">
+                                        {{ $whislist }}
+                                    </span>
+                                @else
+                                    <span
+                                        class="position-absolute btn-secondarys top-4 start-90 translate-middle badge rounded-pill">
+                                        {{ $whislist }}
+                                    </span>
+                                @endif
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('order.waitConfirm') }}" class="nav-link position-relative me-2 text-light">
+                            <a href="{{ route('order.waitConfirm') }}"
+                                class="nav-link position-relative me-2 text-primarys">
                                 <i class="bi bi-cart-check"></i>
                                 @php
                                     $orderCount = \App\Models\Order::where('user_id', '=', Auth::user()->id)->count();
                                 @endphp
-                                <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill"
-                                    id="button-sec">
-                                    {{ $orderCount }}
-                                </span>
+                                @if ($orderCount === 0)
+                                    <span
+                                        class="position-absolute d-none btn-secondarys top-4 start-90 translate-middle badge rounded-pill">
+                                        {{ $orderCount }}
+                                    </span>
+                                @else
+                                    <span
+                                        class="position-absolute btn-secondarys top-4 start-90 translate-middle badge rounded-pill">
+                                        {{ $orderCount }}
+                                    </span>
+                                @endif
                             </a>
                         </li>
                     @endif
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-light text-capitalize" href="#"
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-primarys text-capitalize" href="#"
                             role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu-end border-0 shadow" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                            document.getElementById('logout-form').submit();">

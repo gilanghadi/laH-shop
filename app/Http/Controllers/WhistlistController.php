@@ -28,14 +28,14 @@ class WhistlistController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store($id)
+    public function store(Product $product, $id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         $whistlist = Whistlist::where('user_id', '=', Auth::user()->id)->where('product_id', '=',  $product->id)->first();
         if (empty($whistlist)) {
             $whistlist = new Whistlist();
             $whistlist->user_id = Auth::user()->id;
-            $whistlist->product_id = $id;
+            $whistlist->product_id = $product->id;
             $whistlist->save();
             if ($whistlist->save()) {
                 return redirect()->route('home')->with('success', 'Menambahkan Ke dalam Whistlist');
@@ -50,7 +50,7 @@ class WhistlistController extends Controller
      */
     public function show(Whistlist $whistlist)
     {
-        $whistlist = Whistlist::where('user_id', '=', Auth::user()->id)->get();
+        $whistlist = Whistlist::with(['product', 'user'])->where('user_id', '=', Auth::user()->id)->get();
         return view('whistlist.index', compact(['whistlist']));
     }
 
