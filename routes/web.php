@@ -40,6 +40,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
 Route::prefix('home')->middleware(['auth', 'custom'])->group(function () {
     Route::get('/', 'App\Http\Controllers\HomeController' . '@index')->name('home');
+    Route::get('/search', 'App\Http\Controllers\HomeController' . '@search')->name('search');
     Route::resource('order', 'App\Http\Controllers\OrderController');
 
     // whistlist
@@ -52,7 +53,6 @@ Route::prefix('home')->middleware(['auth', 'custom'])->group(function () {
     Route::post('order/store/{id}', 'App\Http\Controllers\OrderController' . '@store')->name('order.store');
     Route::get('product/show/{id}', 'App\Http\Controllers\OrderController' . '@show')->name('order.show');
     Route::get('order/destroy/{id}', 'App\Http\Controllers\OrderController' . '@destroy')->name('order.destroy');
-
     // transaction
     // Route::resource('transaction', 'App\Http\Controllers\TransactionController');
     Route::post('transaction/store/{id}', 'App\Http\Controllers\TransactionController' . '@store')->name('transaction.store');

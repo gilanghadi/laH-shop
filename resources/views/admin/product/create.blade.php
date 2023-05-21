@@ -13,35 +13,35 @@
                                 <label for="exampleFormControlInput1" class="form-label">Name Product</label>
                                 <input type="text"
                                     class="form-control text-primarys rounded-0 text-capitalize border-0 border-bottom"
-                                    name="name" id="exampleFormControlInput1" required>
+                                    name="name" id="exampleFormControlInput1" value="{{ old('name') }}" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput2" class="form-label">Stock</label>
                                 <input type="number" class="form-control text-primarys rounded-0 border-0 border-bottom"
-                                    name="stock" id="exampleFormControlInput2" required>
+                                    name="stock" id="exampleFormControlInput2" value="{{ old('stock') }}" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput3" class="form-label">Price</label>
                                 <input type="number" class="form-control text-primarys rounded-0 border-0 border-bottom"
-                                    name="price" id="exampleFormControlInput3" required>
+                                    name="price" id="exampleFormControlInput3" value="{{ old('price') }}" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput4" class="form-label">Image</label>
-                                <input type="file" class="form-control" name="image" id="exampleFormControlInput4"
-                                    required onchange="preview()">
+                                <input type="file" class="form-control" name="image" value="{{ old('image') }}"
+                                    id="exampleFormControlInput4" required onchange="preview()">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
                                 <textarea class="form-control text-primarys text-capitalize" name="desc" id="exampleFormControlTextarea1"
-                                    rows="3"></textarea>
+                                    value="{{ old('desc') }}" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="col-lg-6">

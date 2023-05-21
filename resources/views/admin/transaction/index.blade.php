@@ -2,9 +2,9 @@
 @section('title', 'Transaction Order')
 @section('content')
     <div class="container">
-        <div class="bg-white border-0 rounded-md rounded-3 p-5">
+        <div class="px-5 mt-4">
             <p class="fw-semibold fs-4">Products Transaction</p>
-            <hr class="mb-2">
+            <hr class="mb-4">
             <table class="table table-hover display" id="table_id">
                 <thead>
                     <tr>
@@ -24,8 +24,11 @@
                     @foreach ($transaction as $t)
                         <tr class="text-capitalize">
                             <td>{{ $loop->iteration }}</td>
-                            <td><img src="{{ url('storage') }}/{{ $t->order->product->image }}"
-                                    alt="{{ $t->order->product->image }}" width="90">
+                            <td>
+                                {{-- <img src="{{ url('storage') }}/{{ \App\Models\Product::find($o->product_id)->image }}"
+                                    alt="{{ $o->image }}" width="90"> --}}
+                                <img src="{{ $t->order->product->image }}" alt="{{ $t->order->product->image }}"
+                                    width="90">
                             </td>
                             <td>{{ \Illuminate\Support\Str::limit($t->user->name, '15', '..') }}</td>
                             <td>{{ $t->order->product->name }}</td>
@@ -36,9 +39,9 @@
                             <td>{{ $t->order->metode }}</td>
                             <td>
                                 @if ($t->status = 1)
-                                    <span class="badge" id="button-sec">Terbayar</span>
+                                    <span class="badge btn-secondarys">Terbayar</span>
                                 @else
-                                    <span class="badge" id="button-prim">Belum Terbayar</span>
+                                    <span class="badge btn-warnings">Belum Terbayar</span>
                                 @endif
                             </td>
                         </tr>

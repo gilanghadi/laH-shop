@@ -22,9 +22,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(40)->withQueryString();
+        $search = $request->search;
+        $products = Product::where('name', 'like', '%' . $search . '%')->paginate(30)->withQueryString();
         return view('home', [
             'products' => $products
         ]);

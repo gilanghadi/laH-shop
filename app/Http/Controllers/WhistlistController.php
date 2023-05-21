@@ -30,8 +30,8 @@ class WhistlistController extends Controller
      */
     public function store(Product $product, $id)
     {
-        $product = Product::findOrFail($id);
-        $whistlist = Whistlist::where('user_id', '=', Auth::user()->id)->where('product_id', '=',  $product->id)->first();
+        $product = Product::with(['user'])->findOrFail($id);
+        $whistlist = Whistlist::with(['product', 'user'])->first();
         if (empty($whistlist)) {
             $whistlist = new Whistlist();
             $whistlist->user_id = Auth::user()->id;
@@ -50,7 +50,7 @@ class WhistlistController extends Controller
      */
     public function show(Whistlist $whistlist)
     {
-        $whistlist = Whistlist::with(['product', 'user'])->where('user_id', '=', Auth::user()->id)->get();
+        $whistlist = Whistlist::with(['product', 'user'])->get();
         return view('whistlist.index', compact(['whistlist']));
     }
 

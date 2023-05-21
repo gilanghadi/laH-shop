@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id');
-            $table->foreignUuid('product_id');
+            $table->foreignUuid('product_id')->onDelete('rescrict');
             $table->string('address');
             $table->integer('postcode');
             $table->bigInteger('telp');

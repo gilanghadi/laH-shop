@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('whistlists', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id');
-            $table->foreignUuid('product_id');
+            $table->foreignUuid('product_id')->onDelete('rescrict');
             $table->timestamps();
         });
     }

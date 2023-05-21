@@ -11,6 +11,7 @@
                 <thead>
                     <tr>
                         <th scope="col">No</th>
+                        <th scope="col">Image</th>
                         <th scope="col">Client Name</th>
                         <th scope="col">Product Name</th>
                         <th scope="col">Price / Product</th>
@@ -25,6 +26,12 @@
                     @foreach ($order as $o)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
+                            <td>
+                                {{-- <img src="{{ url('storage') }}/{{ \App\Models\Product::find($o->product_id)->image }}"
+                                    alt="{{ $o->image }}" width="90"> --}}
+                                <img src="{{ \App\Models\Product::find($o->product_id)->image }}" alt="{{ $o->image }}"
+                                    width="90">
+                            </td>
                             <td>{{ App\Models\User::find($o->user_id)->name }}</td>
                             <td>{{ App\Models\Product::find($o->product_id)->name }}</td>
                             <td>Rp. {{ number_format(App\Models\Product::find($o->product_id)->price) }}</td>
@@ -44,7 +51,7 @@
                                     </a>
                                 @else
                                     <a href="{{ route('orderAdmin.cancel', $o->id) }}"
-                                        class="btn btn-dangers">Unconfirmed</a>
+                                        class="btn btn-dangers disabled">Unconfirmed</a>
                                 @endif
                             </td>
                         </tr>

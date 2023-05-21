@@ -11,7 +11,7 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate(40)->withQueryString();
+        $products = Product::paginate(30)->withQueryString();
         return view('welcome', [
             "products" => $products
         ]);

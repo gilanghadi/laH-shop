@@ -30,11 +30,12 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" class="position-relative">
         @include('partials.navbar')
-        <main class="py-4">
+        <main class="py-4" class="position-relative">
             @yield('content')
         </main>
+        {{-- @include('partials.footer') --}}
     </div>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
