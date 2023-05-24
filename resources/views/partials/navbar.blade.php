@@ -24,7 +24,8 @@
                 <form action="" method="get">
                     @csrf
                     <div class="d-flex">
-                        <input type="text" class="form-control me-2" name="search" id="search">
+                        <input type="text" class="form-control me-2" name="search" id="search"
+                            value="{{ old('search', request()->search) }}">
                         <button class="btn btn-primarys">Search</button>
                     </div>
                 </form>
