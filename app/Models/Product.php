@@ -44,10 +44,10 @@ class Product extends Model
     }
 
     public function toSearchableArray()
-{
-    return [
-        'name' => $this->name,
-        'desc' =>  $this->desc,
-    ];
-}
+    {
+        return [
+            'name' => $this->name,
+            'desc' =>  $this->desc,
+        ];
+    }
 }
