@@ -21,13 +21,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
-                <form action="" method="get">
-                    @csrf
-                    <div class="d-flex">
-                        <input type="text" class="form-control me-2" name="search" id="search">
-                        <button class="btn btn-primarys">Search</button>
-                    </div>
-                </form>
+                @if (Auth::user()->role === 'customer')
+                    <form action="" method="get">
+                        @csrf
+                        <div class="d-flex">
+                            <input type="text" class="form-control me-2" name="search" id="search">
+                            <button class="btn btn-primarys">Search</button>
+                        </div>
+                    </form>
+                @endif
             </ul>
 
             <!-- Right Side Of Navbar -->

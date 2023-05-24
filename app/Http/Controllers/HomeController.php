@@ -24,8 +24,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->search;
-        $products = Product::where('name', 'like', '%' . $search . '%')->paginate(30)->withQueryString();
+        $products = Product::search($request->search)->paginate(30);
         return view('home', [
             'products' => $products
         ]);

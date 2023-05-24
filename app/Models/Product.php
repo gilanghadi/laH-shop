@@ -4,15 +4,18 @@ namespace App\Models;
 
 use App\Models\Order;
 use App\Models\Whistlist;
+use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, Searchable;
     protected $guarded = [];
 
+
+    // relationship
     public function order()
     {
         return $this->belongsTo(Order::class);
@@ -26,6 +29,10 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
+
+
+
+    // function
     public function getIncrementing()
     {
         return false;
@@ -35,4 +42,12 @@ class Product extends Model
     {
         return 'string';
     }
+
+    public function toSearchableArray()
+{
+    return [
+        'name' => $this->name,
+        'desc' =>  $this->desc,
+    ];
+}
 }

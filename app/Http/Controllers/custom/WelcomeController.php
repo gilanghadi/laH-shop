@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class WelcomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(30)->withQueryString();
+        $products = Product::search($request->search)->paginate(30);
         return view('welcome', [
             "products" => $products
         ]);
